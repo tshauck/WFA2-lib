@@ -17,6 +17,19 @@ include(GNUInstallDirs)
 
 find_package(PkgConfig REQUIRED)
 
+execute_process(COMMAND brew --prefix llvm@15 OUTPUT_VARIABLE LLVM_PREFIX)
+string(STRIP ${LLVM_PREFIX} LLVM_ROOT_DIR)
+
+# Set the required clang version to 16
+set(CC ${LLVM_ROOT_DIR}/bin/clang)
+set(CXX ${LLVM_ROOT_DIR}/bin/clang++)
+
+set(CMAKE_C_COMPILER ${CC})
+set(CMAKE_CXX_COMPILER ${CXX})
+
+message("-- wtt: CC is ${CC}")
+message("-- wtt: CXX is ${CXX}")
+
 feature_summary(
   FATAL_ON_MISSING_REQUIRED_PACKAGES
   WHAT REQUIRED_PACKAGES_NOT_FOUND)
@@ -168,8 +181,14 @@ add_library(wfa2::wfa2cpp ALIAS wfa2cpp)
 add_library(wfa2::wfa2cpp_static ALIAS wfa2cpp_static)
 
 # ---- Get version
+execute_process(
+  COMMAND git describe --tags --always
+  OUTPUT_VARIABLE BUILD_NUMBER
+  RESULT_VARIABLE GIT_ERROR
+  ERROR_QUIET
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
 
-file (STRINGS "VERSION" BUILD_NUMBER)
 add_definitions(-DWFA2LIB_VERSION="${BUILD_NUMBER}")
 add_definitions(-DVERSION="${BUILD_NUMBER}")
 
