@@ -17,19 +17,6 @@ include(GNUInstallDirs)
 
 find_package(PkgConfig REQUIRED)
 
-execute_process(COMMAND brew --prefix llvm@15 OUTPUT_VARIABLE LLVM_PREFIX)
-string(STRIP ${LLVM_PREFIX} LLVM_ROOT_DIR)
-
-# Set the required clang version to 16
-set(CC ${LLVM_ROOT_DIR}/bin/clang)
-set(CXX ${LLVM_ROOT_DIR}/bin/clang++)
-
-set(CMAKE_C_COMPILER ${CC})
-set(CMAKE_CXX_COMPILER ${CXX})
-
-message("-- wtt: CC is ${CC}")
-message("-- wtt: CXX is ${CXX}")
-
 feature_summary(
   FATAL_ON_MISSING_REQUIRED_PACKAGES
   WHAT REQUIRED_PACKAGES_NOT_FOUND)
