@@ -43,7 +43,7 @@ if(EXTRA_FLAGS)
 endif(EXTRA_FLAGS)
 
 find_package(Threads)
-set_package_properties(Threads PROPERTIES TYPE REQUIRED)
+# set_package_properties(Threads PROPERTIES TYPE REQUIRED)
 
 # ---- Build switches
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
