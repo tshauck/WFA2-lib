@@ -12,14 +12,14 @@ project(wfa2lib)
 
 set(CMAKE_CXX_STANDARD 17)
 
-include(FeatureSummary)
+# include(FeatureSummary)
 include(GNUInstallDirs)
 
 find_package(PkgConfig REQUIRED)
 
-feature_summary(
-  FATAL_ON_MISSING_REQUIRED_PACKAGES
-  WHAT REQUIRED_PACKAGES_NOT_FOUND)
+# feature_summary(
+#   FATAL_ON_MISSING_REQUIRED_PACKAGES
+#   WHAT REQUIRED_PACKAGES_NOT_FOUND)
 
 # ---- Options
 
